@@ -1,15 +1,11 @@
 package com.creation;
 
-import org.telegram.telegrambots.*;
 
 import org.apache.log4j.Logger;
 
-import java.util.Timer;
 
 public class App {
   private static final Logger log = Logger.getLogger(App.class);
-
-
 
   public static void main(String[] args) {
     Task task = new AvitoProductsTask();

@@ -1,5 +1,6 @@
 package com.creation.command;
 
+import com.creation.SystemException;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -21,7 +22,7 @@ abstract public class ServiceCommand extends BotCommand {
     try {
       absSender.execute(message);
     } catch (TelegramApiException e) {
-      log.error(e.getMessage());
+      SystemException.putError(log, e.getMessage());
       //логируем сбой Telegram Bot API, используя commandName и userName
     }
   }

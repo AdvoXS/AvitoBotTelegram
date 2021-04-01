@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,7 +24,7 @@ public class AvitoProductsTask extends Task {
   @Getter
   @Setter
   MainBot bot;
-
+  private static final Logger log = Logger.getLogger(AvitoProductsTask.class);
   public void run() {
     if (isActive) {
       try {
@@ -65,6 +66,7 @@ public class AvitoProductsTask extends Task {
       URL urlImage = new URL(strImageURL);
       return urlImage.openStream();
     } catch (IOException e) {
+      SystemException.putError(log, e.getMessage());
       e.printStackTrace();
     }
     return null;

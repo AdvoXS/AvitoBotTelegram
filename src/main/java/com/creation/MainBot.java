@@ -3,7 +3,6 @@ package com.creation;
 import com.creation.filter.url.RegionFilter;
 import com.creation.filter.url.SortProductsFilter;
 import com.creation.filter.url.UrlFilter;
-import com.creation.filter.url.price.PriceMaxFilter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -66,6 +65,7 @@ public class MainBot extends TelegramLongPollingBot {
       try {
         execute(message);
       } catch (TelegramApiException e) {
+        SystemException.putError(log, e.getMessage());
         e.printStackTrace();
       }
     }
@@ -95,15 +95,17 @@ public class MainBot extends TelegramLongPollingBot {
       telegramBotsApi.registerBot(this);
       log.info("TelegramAPI started. Look for messages");
     } catch (TelegramApiRequestException e) {
-      log.error("Cant Connect. Pause " + RECONNECT_PAUSE / 1000 + "sec and try again. Error: " + e.getMessage());
+      log.error("Cant Connect. Pause " + RECONNECT_PAUSE / 1000 + "sec and try again. SystemException: " + e.getMessage());
       try {
         Thread.sleep(RECONNECT_PAUSE);
       } catch (InterruptedException e1) {
         e1.printStackTrace();
+        SystemException.putError(log, e.getMessage());
         return;
       }
       connect();
     } catch (TelegramApiException e) {
+      SystemException.putError(log, e.getMessage());
       e.printStackTrace();
     }
   }
@@ -118,6 +120,7 @@ public class MainBot extends TelegramLongPollingBot {
     try {
       execute(message);
     } catch (TelegramApiException e) {
+      SystemException.putError(log, e.getMessage());
       e.printStackTrace();
     }
   }

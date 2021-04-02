@@ -56,6 +56,7 @@ public class MainBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
+    SystemException.putDebug(log, "Bot received message! Text: "+ update.getMessage());
     chatId = String.valueOf(update.getMessage().getChatId());
     String inputText = update.getMessage().getText();
     if (inputText.startsWith("/start")) {

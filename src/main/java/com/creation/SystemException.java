@@ -12,4 +12,9 @@ public class SystemException {
     log.warn(text);
     System.err.println(text);
   }
+
+  public static void putDebug(Logger log, String text){
+    log.debug(text);
+    System.out.println(text);
+  }
 }

@@ -58,6 +58,7 @@ public class MainBot extends TelegramLongPollingBot {
     SystemMessage.putDebug(log, "Bot received message! Text: "+ update.getMessage());
     chatId = String.valueOf(update.getMessage().getChatId());
     String inputText = update.getMessage().getText();
+    sendMessageTest();
     if (inputText.startsWith("/start")) {
       SendMessage message = new SendMessage();
       message.setChatId(chatId);
@@ -97,8 +98,6 @@ public class MainBot extends TelegramLongPollingBot {
       TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
       telegramBotsApi.registerBot(this);
       SystemMessage.putDebug(log,"TelegramAPI started. Look for messages");
-
-     sendMessageTest();
 
     } catch (TelegramApiRequestException e) {
       log.error("Cant Connect. Pause " + RECONNECT_PAUSE / 1000 + "sec and try again. SystemMessage: " + e.getMessage());

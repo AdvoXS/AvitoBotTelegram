@@ -95,7 +95,7 @@ public class MainBot extends TelegramLongPollingBot {
 
   public void connect(){
     try {
-      TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+      TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
       telegramBotsApi.registerBot(this);
       SystemMessage.putDebug(log,"TelegramAPI started. Look for messages");
 
@@ -109,9 +109,6 @@ public class MainBot extends TelegramLongPollingBot {
         return;
       }
       connect();
-    } catch (TelegramApiException e) {
-      SystemMessage.putError(log, e.getMessage());
-      e.printStackTrace();
     }
   }
 

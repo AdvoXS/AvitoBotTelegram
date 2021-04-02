@@ -1,2 +1,2 @@
 worker: java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -cp ./target/classes:./target/dependency/* com.creation.App
-web: java -jar target/telegram-bot-avito.jar -agentlib:jdwp=transport=dt_socket,server=y,address=9090,suspend=n
+web: java -jar target/com.creation.tav-1.0-SNAPSHOT.jar -agentlib:jdwp=transport=dt_socket,server=y,address=9090,suspend=n

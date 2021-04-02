@@ -75,19 +75,18 @@
                         <goals><goal>copy-dependencies</goal></goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <jdkVersion>1.8</jdkVersion>
-                    <appName>telegram-bot-avito</appName>
-                    <processTypes>
-                        <!-- Tell Heroku how to launch your application -->
-                        <web>java -jar ./target/telegram-bot-avito.jar</web>
-                    </processTypes>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <archive>
                         <manifest>

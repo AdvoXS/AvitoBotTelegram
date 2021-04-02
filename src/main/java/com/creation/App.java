@@ -8,7 +8,7 @@ public class App {
 
   public static void main(String[] args) {
     Task task = new AvitoProductsTask();
-    MainBot mainBot = new MainBot(task);
+    MainBot mainBot = new MainBot();
     mainBot.setUserName("AvitoVideocardsParserBot");
     mainBot.setToken("1724743407:AAGMX1kuvCZEz40hnC6m5IqTfPgdGLY-3_g");
     mainBot.connect();

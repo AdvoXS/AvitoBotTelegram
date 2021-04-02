@@ -38,24 +38,23 @@ public class MainBot extends TelegramLongPollingBot {
   @Setter
   @Getter
   String token;
-
   @Getter
   Task task;
+  @Getter
+  String chatId;
+
   public MainBot(Task task) {
     this.task = task;
   }
 
-  @Getter
 
-
-  String chatId;
   public void onUpdatesReceived(List<Update> updates) {
-
 
   }
 
   @Override
   public void onUpdateReceived(Update update) {
+    SystemMessage.putError(log, "Error");
     SystemMessage.putDebug(log, "Bot received message! Text: "+ update.getMessage());
     chatId = String.valueOf(update.getMessage().getChatId());
     String inputText = update.getMessage().getText();
@@ -70,18 +69,21 @@ public class MainBot extends TelegramLongPollingBot {
         e.printStackTrace();
       }
     }
-    //TODO:TEST
+    runTask();
+  }
+
+  //TODO:TEST
+  private void runTask(){
     UrlFilter filter = new RegionFilter();
     Timer timer = new Timer();
-
     task.setActive(true);
-    //task.setUrl(filter.filterUrl(url, "Vologda")); // d = 1 с авито доставкой, pmax = 20000 макс цена, s=104 фильтр по дате
-    //filter = new PriceMaxFilter();
     task.setUrl(filter.filterUrl(url,"20000"));
     filter = new SortProductsFilter();
     task.setUrl(filter.filterUrl(url,SortProductsFilter.ValueFilter.DEFAULT.getValue()));
+    SystemMessage.putDebug(log, "Running task parser...");
     timer.schedule(task,1000, 100000);
   }
+
   public String getBotUsername() {
     return userName;
   }
@@ -125,6 +127,4 @@ public class MainBot extends TelegramLongPollingBot {
       e.printStackTrace();
     }
   }
-
-
 }

@@ -3,7 +3,6 @@ package com.creation;
 
 import org.apache.log4j.Logger;
 
-
 public class App {
   private static final Logger log = Logger.getLogger(App.class);
 

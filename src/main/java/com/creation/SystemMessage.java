@@ -2,7 +2,7 @@ package com.creation;
 
 import org.apache.log4j.Logger;
 
-public class SystemException {
+public class SystemMessage {
   public static void putError(Logger log, String text){
     log.error(text);
     System.err.println(text);

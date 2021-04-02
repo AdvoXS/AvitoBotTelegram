@@ -56,7 +56,7 @@ public class MainBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
-    SystemException.putDebug(log, "Bot received message! Text: "+ update.getMessage());
+    SystemMessage.putDebug(log, "Bot received message! Text: "+ update.getMessage());
     chatId = String.valueOf(update.getMessage().getChatId());
     String inputText = update.getMessage().getText();
     if (inputText.startsWith("/start")) {
@@ -66,7 +66,7 @@ public class MainBot extends TelegramLongPollingBot {
       try {
         execute(message);
       } catch (TelegramApiException e) {
-        SystemException.putError(log, e.getMessage());
+        SystemMessage.putError(log, e.getMessage());
         e.printStackTrace();
       }
     }
@@ -94,19 +94,19 @@ public class MainBot extends TelegramLongPollingBot {
     try {
       TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
       telegramBotsApi.registerBot(this);
-      log.info("TelegramAPI started. Look for messages");
+      SystemMessage.putDebug(log,"TelegramAPI started. Look for messages");
     } catch (TelegramApiRequestException e) {
-      log.error("Cant Connect. Pause " + RECONNECT_PAUSE / 1000 + "sec and try again. SystemException: " + e.getMessage());
+      log.error("Cant Connect. Pause " + RECONNECT_PAUSE / 1000 + "sec and try again. SystemMessage: " + e.getMessage());
       try {
         Thread.sleep(RECONNECT_PAUSE);
       } catch (InterruptedException e1) {
         e1.printStackTrace();
-        SystemException.putError(log, e.getMessage());
+        SystemMessage.putError(log, e.getMessage());
         return;
       }
       connect();
     } catch (TelegramApiException e) {
-      SystemException.putError(log, e.getMessage());
+      SystemMessage.putError(log, e.getMessage());
       e.printStackTrace();
     }
   }
@@ -121,7 +121,7 @@ public class MainBot extends TelegramLongPollingBot {
     try {
       execute(message);
     } catch (TelegramApiException e) {
-      SystemException.putError(log, e.getMessage());
+      SystemMessage.putError(log, e.getMessage());
       e.printStackTrace();
     }
   }

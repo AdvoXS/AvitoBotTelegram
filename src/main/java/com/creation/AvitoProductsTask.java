@@ -66,7 +66,7 @@ public class AvitoProductsTask extends Task {
       URL urlImage = new URL(strImageURL);
       return urlImage.openStream();
     } catch (IOException e) {
-      SystemException.putError(log, e.getMessage());
+      SystemMessage.putError(log, e.getMessage());
       e.printStackTrace();
     }
     return null;

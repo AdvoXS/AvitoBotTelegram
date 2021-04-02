@@ -75,7 +75,14 @@
                         <goals><goal>copy-dependencies</goal></goals>
                     </execution>
                 </executions>
-
+                <configuration>
+                    <jdkVersion>1.8</jdkVersion>
+                    <appName>telegram-bot-avito</appName>
+                    <processTypes>
+                        <!-- Tell Heroku how to launch your application -->
+                        <web>java -jar ./target/telegram-bot-avito.jar</web>
+                    </processTypes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

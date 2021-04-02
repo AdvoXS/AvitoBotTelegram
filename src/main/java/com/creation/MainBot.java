@@ -97,6 +97,9 @@ public class MainBot extends TelegramLongPollingBot {
       TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
       telegramBotsApi.registerBot(this);
       SystemMessage.putDebug(log,"TelegramAPI started. Look for messages");
+
+     sendMessageTest();
+
     } catch (TelegramApiRequestException e) {
       log.error("Cant Connect. Pause " + RECONNECT_PAUSE / 1000 + "sec and try again. SystemMessage: " + e.getMessage());
       try {
@@ -113,6 +116,17 @@ public class MainBot extends TelegramLongPollingBot {
     }
   }
 
+  private void sendMessageTest(){
+    SendMessage message = new SendMessage();
+    message.setText("test");
+    message.setChatId(getChatId());
+    try {
+      execute(message);
+    } catch (TelegramApiException e) {
+      SystemMessage.putError(log,e.getMessage());
+      e.printStackTrace();
+    }
+  }
   public void sendPhoto(String chatId, String text, InputStream is){
     SendPhoto message = new SendPhoto();
     message.setCaption(text);
